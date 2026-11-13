@@ -124,6 +124,11 @@ class SkiaGraphicsEngine private constructor(
         return inputStream?.let { resources.decode(it.readBytes(), (it as? AssetInputStream)?.path) } ?: r()
     }
 
+    override fun loadTextureBytes(bytes: ByteArray?, assetPath: String?): Texture {
+        checkOpen()
+        return bytes?.let { resources.decode(it, assetPath) } ?: r()
+    }
+
     override fun a(i: Int, i2: Int, z: Boolean): SkiaTexture = b(i, i2, z)
     override fun b(i: Int, i2: Int, z: Boolean): SkiaTexture {
         checkOpen()
