@@ -61,7 +61,7 @@ android {
     testOptions.unitTests.isIncludeAndroidResources = true
 
     defaultConfig {
-        applicationId = project.group.toString()
+        applicationId = "com.itsalirezajr.warcore"
         minSdk = 28
         //noinspection EditedTargetSdkVersion
         targetSdk = 37
