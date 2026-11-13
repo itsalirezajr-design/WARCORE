@@ -55,6 +55,15 @@ interface GraphicsEngine {
 
     fun a(inputStream: InputStream?, z: Boolean): Texture
 
+    /**
+     * Decode an image supplied as bytes by a platform asset host.
+     *
+     * Browser and other non-streaming hosts can use this entry point without exposing
+     * JVM InputStream or filesystem APIs. Legacy backends inherit the stream adapter.
+     */
+    fun loadTextureBytes(bytes: ByteArray?, assetPath: String? = null): Texture =
+        bytes?.inputStream()?.let { a(it, false) } ?: r()
+
     fun a(i: Int, i2: Int, z: Boolean): Texture
 
     fun b(i: Int, i2: Int, z: Boolean): Texture
