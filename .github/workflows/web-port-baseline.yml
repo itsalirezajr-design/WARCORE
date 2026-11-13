@@ -1,0 +1,52 @@
+name: Web port feasibility baseline
+
+on:
+  push:
+    branches:
+      - web-port
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: web-port-baseline-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  core-baseline:
+    name: Compile shared engine baseline
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Java 25
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: gradle
+
+      - name: Make Gradle wrapper executable
+        run: chmod +x ./gradlew
+
+      - name: Compile current engine modules
+        run: |
+          ./gradlew --no-daemon \
+            :mod-api:compileKotlin \
+            :core:compileKotlin \
+            :core:compileJava \
+            :ui:compileKotlinJvm
+
+      - name: Upload Gradle diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v6
+        with:
+          name: web-port-baseline-diagnostics
+          path: |
+            **/build/reports/**
+            **/build/test-results/**
+            ~/.gradle/daemon/**/daemon-*.out.log
+          if-no-files-found: ignore
+          retention-days: 7
