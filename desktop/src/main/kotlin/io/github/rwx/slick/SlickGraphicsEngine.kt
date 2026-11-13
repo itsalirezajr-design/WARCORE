@@ -125,6 +125,11 @@ class SlickGraphicsEngine private constructor(
         return createTexture(bytes, sourceKey ?: "stream/${System.identityHashCode(inputStream)}")
     }
 
+    override fun loadTextureBytes(bytes: ByteArray?, assetPath: String?): Texture {
+        if (bytes == null || bytes.isEmpty()) return fallbackTexture
+        return createTexture(bytes, assetPath ?: "bytes/${bytes.size}")
+    }
+
     override fun a(i: Int, i2: Int, z: Boolean): Texture =
         try {
             SlickTexture(Image(i.coerceAtLeast(1), i2.coerceAtLeast(1)))
