@@ -78,7 +78,7 @@ data class AppMetadata(
         const val COMPATIBLE_CORE_VERSION_CODE = 176
     }
 }
-interface PlatformStorage {
+interface PlatformStorage : AssetSource {
 
     val rootDir: StorageLocation
     val localDir: StorageLocation
@@ -116,7 +116,7 @@ interface PlatformStorage {
 
     fun listAssets(prefix: String): List<String>
     fun assetFileExists(path: String): Boolean
-    fun readAssetBytes(path: String): ByteArray? = null
+    override fun readAssetBytes(path: String): ByteArray? = null
     fun openAssetStream(path: String): InputStream? = readAssetBytes(path)?.inputStream()
     fun createDirectories()
 }
