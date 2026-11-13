@@ -16,6 +16,18 @@ The job compiled all of:
 
 This proves the current JVM baseline builds in CI. It does not prove a browser target exists.
 
+## Progress since the initial audit
+
+The first asset-loading seam has now been introduced without changing existing renderer call sites:
+
+- `AssetSource` provides a byte-oriented read contract.
+- `PlatformStorage` extends `AssetSource`, preserving the existing JVM storage API.
+- `SkiaGraphicsEngine` accepts `AssetSource` and decodes supplied bytes directly.
+- `GraphicsEngine.loadTextureBytes` provides a compatibility entry point for byte-backed hosts.
+- The Slick and Skia renderers override that entry point to decode bytes directly instead of creating a JVM stream first.
+
+These changes are preparatory only. They do **not** make `:core` a Kotlin Multiplatform module, and they do not provide a browser renderer or a playable web build.
+
 ## First hard boundary: GraphicsEngine
 
 Source: `core/src/main/kotlin/com/corrodinggames/rts/gameFramework/graphics/GraphicsEngine.kt`
