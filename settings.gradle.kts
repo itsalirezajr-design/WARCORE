@@ -1,4 +1,4 @@
-rootProject.name = "RWX"
+rootProject.name = "WARCORE"
 
 pluginManagement {
     repositories {
