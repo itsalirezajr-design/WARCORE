@@ -7,7 +7,7 @@ import com.corrodinggames.rts.gameFramework.graphics.RenderTargetMode
 import com.corrodinggames.rts.gameFramework.graphics.ShaderProgram
 import com.corrodinggames.rts.gameFramework.graphics.Texture
 import com.corrodinggames.rts.gameFramework.utility.AssetInputStream
-import io.github.rwx.PlatformStorage
+import io.github.rwx.AssetSource
 import io.github.rwx.geometry.Rect
 import io.github.rwx.geometry.RectF
 import io.github.rwx.render.canvas.Paint
@@ -40,7 +40,7 @@ class SkiaGraphicsEngine private constructor(
     private val ownsResources: Boolean = false,
 ) : GraphicsEngine, AutoCloseable {
     constructor(readAsset: (String) -> ByteArray? = { null }) : this(SkiaResources(readAsset), ownsResources = true)
-    constructor(storage: PlatformStorage) : this(storage::readAssetBytes)
+    constructor(assets: AssetSource) : this(assets::readAssetBytes)
 
     private val paints = SkiaPaintAdapter()
     private var borrowedCanvas: Canvas? = null
