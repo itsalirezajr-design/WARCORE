@@ -2,9 +2,9 @@
 
 ![logo](logo.svg)
 
-# Rusted Warfare eXtension
+# WARCORE
 
-Rebuilding and extending Rusted Warfare as an open-source cross-platform RTS game
+A real-time strategy game for Android and desktop, built on an open-source RTS foundation.
 
 ----
 
