@@ -16,10 +16,10 @@
             android:name="io.github.rwx.RwxApplication"
             android:allowBackup="false"
             android:hardwareAccelerated="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="RWX"
+            android:icon="@drawable/ic_warcore"
+            android:label="WARCORE"
             android:largeHeap="true"
-            android:roundIcon="@mipmap/ic_launcher_round"
+            android:roundIcon="@drawable/ic_warcore"
             android:supportsRtl="true"
             android:theme="@android:style/Theme.Material.NoActionBar"
             android:usesCleartextTraffic="true">
